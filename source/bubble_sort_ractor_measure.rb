@@ -29,9 +29,9 @@ def bubble_sort_parallel(array)
 
   branch_point = from_first
 
-  p "branch_point = #{branch_point}"
-
   p "divide: #{Time.now - start_div}"
+
+  p "branch_point = #{branch_point}"
 
   # parallel bubble sort
   Ractor.make_shareable(array)
@@ -41,9 +41,11 @@ def bubble_sort_parallel(array)
     start_rec1 = Time.now
     smaller_part = Ractor.receive
     p "r1_rec: #{Time.now - start_rec1}"
+
     start_bubble1 = Time.now
     bubble_sort(smaller_part)
     p "bubble1: #{Time.now - start_bubble1}"
+
     smaller_part
   end
   p "r1_new: #{Time.now - start_r1}"
@@ -53,9 +55,11 @@ def bubble_sort_parallel(array)
     start_rec2 = Time.now
     larger_part = Ractor.receive
     p "r2_rec: #{Time.now - start_rec2}"
+
     start_bubble2 = Time.now
     bubble_sort(larger_part)
     p "bubble2: #{Time.now - start_bubble2}"
+
     larger_part
   end
   p "r2_new: #{Time.now - start_r2}"
@@ -71,6 +75,7 @@ def bubble_sort_parallel(array)
   start_r1take = Time.now
   smaller_part = r1.take
   p "r1_take: #{Time.now - start_r1take}"
+
   start_r2take = Time.now
   larger_part = r2.take
   p "r2_take: #{Time.now - start_r2take}"
