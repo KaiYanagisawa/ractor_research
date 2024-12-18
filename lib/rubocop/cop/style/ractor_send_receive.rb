@@ -5,8 +5,8 @@ module RuboCop
   module Cop
     module Style
       class RactorSendReceive < Base
-        MSG = 'Ractor.receive detected, '\
-              'but no corresponding `%<ractor>s`.send found in the Ractor block.'.freeze
+        MSG = 'Ractor.receive detected in the Ractor block, '\
+              'but no corresponding `%<ractor>s`.send found.'.freeze
 
         def_node_search :ractor_new?, <<~PATTERN
           (lvasgn $_ractor_name
