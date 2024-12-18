@@ -1,5 +1,5 @@
 require:
   - ./lib/rubocop/cop/custom
 
-Custom/RactorSendReceive:
+Style/RactorSendReceive:
   Enabled: true
