@@ -36,6 +36,18 @@ class RactorChecker
     true
   end
 
+  def send_paired_with_receive?(node)
+    @ractor_sends.each do |send|
+      next unless node.children[0].children[0] == send[:ractor]
+
+      @ractor_receives.each do |receive|
+        return true if send[:ractor] == receive[:ractor]
+      end
+    end
+
+    false
+  end
+
   private
 
   def analyze_ast(node, current_ractor = nil)
