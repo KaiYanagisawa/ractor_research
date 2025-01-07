@@ -3,3 +3,6 @@ require:
 
 Style/RactorSendReceive:
   Enabled: true
+
+Style/RactorReceiveSend:
+  Enabled: true
