@@ -5,6 +5,8 @@ module RuboCop
   module Cop
     module Style
       class RactorSendReceive < Base
+        extend AutoCorrector
+
         MSG = 'Ractor.receive detected in the Ractor block '\
               'but no corresponding `%<ractor>s`.send found.'.freeze
 
@@ -35,7 +37,9 @@ module RuboCop
           return if checker.receive_paired_with_send?(node)
 
           message = message(node)
-          add_offense(node, message: message)
+          add_offense(node, message: message) do |corrector|
+            corrector.insert_after(node, "\n\n#{node.children[0]}.send()")
+          end
         end
 
         private
