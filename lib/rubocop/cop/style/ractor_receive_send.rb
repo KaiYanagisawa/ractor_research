@@ -19,10 +19,6 @@ module RuboCop
           )
         PATTERN
 
-        def_node_search :ractor_new?, <<~PATTERN
-          (send (const nil? :Ractor) :new)
-        PATTERN
-
         def_node_search :ractor_send?, <<~PATTERN
           (send (lvar _) :send ...)
         PATTERN
