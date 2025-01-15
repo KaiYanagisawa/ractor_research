@@ -38,7 +38,7 @@ module RuboCop
 
           message = message(node)
           add_offense(node, message: message) do |corrector|
-            corrector.insert_after(find_ractor_new_block(node).children[1].children[2], "\nRactor.receive")
+            corrector.insert_before(find_ractor_new_block(node).children[1].children[2], "Ractor.receive\n")
           end
         end
 
