@@ -35,7 +35,6 @@ module RuboCop
           checker.check
 
           return if checker.send_paired_with_receive?(node)
-          p find_ractor_new_block(node).children[1].children[2]
 
           message = message(node)
           add_offense(node, message: message) do |corrector|
@@ -48,17 +47,6 @@ module RuboCop
         def find_ractor_new_block(node)
           node.each_ancestor.find { |ancestor| ractor_new_block?(ancestor) }
               .each_child_node.find { |ancestor_node| ractor_new_block?(ancestor_node) }
-        end
-
-        def find_ractor_new_nodes(node)
-          return [] unless node.is_a?(Parser::AST::Node)
-
-          if node.type == :lvasgn &&
-             node.to_json.include?('(const nil :Ractor) :new')
-            return node
-          end
-
-          node.children.flat_map { |child| find_ractor_new_nodes(child) }
         end
 
         def message(node)
