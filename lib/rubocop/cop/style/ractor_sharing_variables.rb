@@ -5,8 +5,8 @@ module RuboCop
   module Cop
     module Style
       class RactorSharingVariables < Base
-        MSG = 'This may be referencing variables outside of the ractor block.' \
-              'External references within a ractor will result in an error.'.freeze
+        MSG = 'This may be referencing variables outside of the ractor block,' \
+              'which will result in an error.'.freeze
 
         def_node_search :ractor_new?, <<~PATTERN
           (lvasgn $_ractor_name
