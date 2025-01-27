@@ -37,11 +37,6 @@ module RuboCop
 
         private
 
-        def find_ractor_new_block(node)
-          node.each_ancestor.find { |ancestor| ractor_new_block?(ancestor) }
-              .each_child_node.find { |ancestor_node| ractor_new_block?(ancestor_node) }
-        end
-
         def message(node)
           format(MSG, ractor: node.children[0].children[0])
         end
